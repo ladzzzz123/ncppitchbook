@@ -1,0 +1,17 @@
+/* Visit http://www.menucool.com/horizontal/javascript-menu for source code and other menu CSS templates */
+
+tr.selected{
+	background-color:blue;
+}
+
+tr.odd {
+   background: #ccc;
+}
+
+table.selectable tr{
+	cursor:pointer;
+}
+
+table.dataTable tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #e2e4ff;
+}

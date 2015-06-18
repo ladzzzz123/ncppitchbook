@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:task="http://www.springframework.org/schema/task" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:jee="http://www.springframework.org/schema/jee" 
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+    xmlns:util="http://www.springframework.org/schema/util" 
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.1.xsd   
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd 
+        http://www.springframework.org/schema/data/jpa 
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd 
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.1.xsd
+        http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security-4.1.xsd
+        http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+		
+    
+	<beans:bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    
+	<beans:bean id="persistenceUnitManager" 
+	    class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+	</beans:bean>
+	
+	<beans:bean id="ncpDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	    <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <beans:property name="url" value="jdbc:mysql://localhost:3306/ncp_pitchbook"/>
+	    <beans:property name="username" value="root"/>
+	    <beans:property name="password" value="ncppitchbook305!"/>
+	</beans:bean>
+	
+	<beans:bean id="entityManagerFactory"
+	    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="ncpDataSource"/>
+	    <property name="persistenceUnitName" value="WISUSER"/>
+	    <property name="jpaVendorAdapter">
+	        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" 
+	            p:showSql="false" p:generateDdl="false">
+	        </bean>
+	    </property>
+	</beans:bean>
+	
+	<beans:bean id="transactionManager"
+	    class="org.springframework.orm.jpa.JpaTransactionManager"
+	    p:entity-manager-factory-ref="entityManagerFactory">
+	</beans:bean>
+	
+	<beans:bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	<beans:bean id="messageSource"
+	    class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <property name="basenames">
+	        <list>
+	            <value>
+	                messages
+	            </value>
+	        </list>
+	    </property>
+	</beans:bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<jpa:repositories base-package="com.ncp.repositories"></jpa:repositories>
+		
+	<context:annotation-config/>
+	<context:component-scan base-package="com.ncp">
+	    <context:exclude-filter type="regex" expression="com.ncp.controllers.*"/>
+	</context:component-scan>
+	
+	
+</beans:beans>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+<!-- START QUARTZ SCHEDULED TASKS/JOBS -->
+<!-- 
+   From left to right, these elements are defined as follows:
+    1. Seconds (0-59)
+    2. Minutes (0-59)
+    3. Hours (0-23)
+    4. The date of the month (1-31)
+    5. Month (1-12 or JAN-DEC)
+    6. Weeks of the date (1-7 or SUN-SAT)
+    7. Year (1970-2099)  
+-->  
+  <!-- "* 15 9-17 * * MON-FRI" ?  : scheduled to run 15 minutes past each hour but only during the 9-to-5-->
+  <!-- "0 0/3 17-23 * * ?" : scheduled to run every three minutes but only between 5pm and 11pm -->
+  <!--  The backslash (/) character denotes value increments. For example, "5/15" in the seconds field means every 15 seconds starting at the fifth second.-->
+ 
+ <!-- EXAMPLE
+   Next Assy Update Job
+   <bean name="nextAssyUpdate" class="com.boeing.batch.processors.NextAssyUpdate"/>
+ 
+   Scheduler job
+   <bean name="nextAssyUpdateJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+     <property name="jobClass" value="com.boeing.batch.jobs.NextAssyUpdateJob" />
+     <property name="jobDataAsMap">
+       <map>
+        <entry key="nextAssyUpdate" value-ref="nextAssyUpdate" />
+       </map>
+     </property>
+   </bean>   
+   
+   <bean id="nextAssyCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+      <property name="jobDetail" ref="nextAssyUpdateJob" />     
+      <property name="cronExpression" value="0 40 2 ? * SUN-SAT" />
+      REMEBER THIS IS SEATTLE TIME
+   </bean>   
+   
+   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="jobDetails">
+      <list>
+        <ref bean="nextAssyUpdateJob" />
+      </list>
+    </property>
+
+    <property name="triggers">
+      <list>
+        <ref bean="nextAssyCronTrigger" />
+      </list>
+    </property>
+   </bean>  
+ -->
+
+
+</beans>

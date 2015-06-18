@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+ 
+<tiles-definitions>
+    
+    <definition name="mainLayout" template="/WEB-INF/views/home.jsp" >
+        <put-attribute name="title" value="NCP"/>
+        <put-attribute name="heading" value="NCP"/>
+        <put-attribute name="navigation" value="/WEB-INF/views/layout/dropdowns.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp"/>
+    </definition>
+
+    <definition name="users.login" extends="mainLayout">
+        <put-attribute name="heading" value="Log In"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/login/login.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="records.index" extends="mainLayout">
+        <put-attribute name="heading" value="Records"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/records/index.jsp"></put-attribute>
+    </definition>
+    
+    
+<!--  ADMIN -->
+    
+    <definition name="admin.index" extends="mainLayout">
+        <put-attribute name="heading" value="Administration"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/index.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="category.index" extends="mainLayout">
+        <put-attribute name="heading" value="Categories"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/category.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="industry.index" extends="mainLayout">
+        <put-attribute name="heading" value="Industries"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/industry.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="companyRecordType.index" extends="mainLayout">
+        <put-attribute name="heading" value="Company Types"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/companyRecordType.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="user.index" extends="mainLayout">
+        <put-attribute name="heading" value="Users"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/user.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="company.index" extends="mainLayout">
+        <put-attribute name="heading" value="Companies"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/company.jsp"></put-attribute>
+    </definition>
+    
+	<!--    EXAMPLE
+		<definition name="mainLayout" template="/WEB-INF/jsp/layout/dashboardLayout.jsp" >
+        <put-attribute name="title" value="PRIME"/>
+        <put-attribute name="heading" value="PRIME"/>
+        <put-attribute name="navigation" value="/WEB-INF/jsp/layout/navigation/dropdowns.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/header2.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/layout/body.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/layout/footer2.jsp" />
+    </definition> -->
+    
+</tiles-definitions>
